@@ -4,7 +4,7 @@ import connection from '../database/db.js';
 
 export const signUp = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password } = res.locals.user;
     const passwordHash = bcrypt.hashSync(password, 10);
 
     await connection.query(
@@ -13,7 +13,6 @@ export const signUp = async (req, res) => {
     );
     return res.sendStatus(201);
   } catch (error) {
-    console.log(error);
     if (error?.constraint === 'users_email_key') {
       return res.sendStatus(409);
     }
@@ -22,7 +21,7 @@ export const signUp = async (req, res) => {
 };
 
 export const signIn = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password } = res.locals.user;
   try {
     const {
       rows: [user],
