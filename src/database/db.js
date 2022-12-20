@@ -2,22 +2,17 @@ import dotenv from 'dotenv';
 import pg from 'pg';
 
 const { Pool } = pg;
+dotenv.config();
 
-async function createConnectionPool() {
-  try {
-    dotenv.config();
-    if (!process.env.DATABASE_URL) {
-      throw new Error('DATABASE_URL is not defined');
-    }
-    const pool = new Pool({
-      connectionString: process.env.DATABASE_URL,
-    });
-    await pool.connect();
-    console.log('connected to PostgreSQL');
-    return pool;
-  } catch (error) {
-    console.error(error);
-  }
+let connection;
+try {
+  connection = new Pool({
+    connectionString: process.env.DATABASE_URL,
+  });
+  await connection.connect();
+  console.log('Connected to PostgreSQL');
+} catch (error) {
+  console.log(error);
 }
 
-export default createConnectionPool();
+export default connection;
