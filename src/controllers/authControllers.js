@@ -42,7 +42,6 @@ export const signIn = async (req, res) => {
     }
     return res.status(401).send('Invalid email or password');
   } catch (error) {
-    console.error(error);
     return res.status(500).send('Error logging in');
   }
 };
