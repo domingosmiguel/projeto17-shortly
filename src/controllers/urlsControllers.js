@@ -3,7 +3,7 @@ import connection from '../database/db.js';
 
 export const shorten = async (req, res) => {
   const { userId } = res.locals;
-  const { url } = req.body;
+  const { url } = res.locals;
   try {
     const shortUrl = await nanoid(8);
     connection.query(
