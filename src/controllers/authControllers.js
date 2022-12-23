@@ -34,8 +34,7 @@ export const signIn = async (req, res) => {
         `INSERT INTO tokens ("userId", token) 
         VALUES ($1, $2)
         ON CONFLICT ("userId") DO UPDATE 
-          SET "userId" = excluded."userId", 
-              token = excluded.token`,
+          SET token = excluded.token`,
         [user.id, token]
       );
       return res.status(200).send(token);
