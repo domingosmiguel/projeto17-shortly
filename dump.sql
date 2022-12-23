@@ -27,7 +27,7 @@ SET default_table_access_method = heap;
 CREATE TABLE public.tokens (
     id integer NOT NULL,
     "userId" integer NOT NULL,
-    token character varying(100) NOT NULL,
+    token TEXT NOT NULL,
     "createdAt" timestamp with time zone DEFAULT now()
 );
 
