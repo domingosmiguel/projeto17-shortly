@@ -59,7 +59,7 @@ export const deleteUrl = async (req, res) => {
     if (deletedRows === 0) {
       const {
         rows: [data],
-      } = await connection.query('SELECT FROM urls WHERE id=$1', [id]);
+      } = await connection.query('SELECT * FROM urls WHERE id=$1', [id]);
       if (!data) return res.sendStatus(404);
       return res.sendStatus(401);
     }
